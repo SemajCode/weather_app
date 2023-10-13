@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class AdditionalInfoItem extends StatelessWidget {
   const AdditionalInfoItem(
       {super.key,
-      required this.atmosphere,
+      required this.label,
       required this.icon,
-      required this.temp});
+      required this.value});
 
   final IconData icon;
-  final String temp;
-  final String atmosphere;
+  final String value;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class AdditionalInfoItem extends StatelessWidget {
           height: 16,
         ),
         Text(
-          atmosphere,
+          label,
           style: const TextStyle(
             fontSize: 16,
           ),
@@ -32,7 +32,7 @@ class AdditionalInfoItem extends StatelessWidget {
           height: 16,
         ),
         Text(
-          temp,
+          value,
           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ],
