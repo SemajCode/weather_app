@@ -126,7 +126,7 @@ class WeatherScreen extends StatelessWidget {
               height: 20,
             ),
             const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 AdditionalInfoItem(
                   icon: Icons.water_drop,
