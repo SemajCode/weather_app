@@ -1,11 +1,17 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:weather_app/additional_info_item.dart';
 import 'package:weather_app/hourly_forecast_item.dart';
 
 class WeatherScreen extends StatelessWidget {
   const WeatherScreen({super.key});
+
+  Future getCurrentWeather() async {
+    var uri = '';
+    http.get(Uri.parse(uri));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +58,7 @@ class WeatherScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            '300° F',
+                            '300K',
                             style: TextStyle(
                               fontSize: 32,
                               fontWeight: FontWeight.bold,
@@ -103,27 +109,27 @@ class WeatherScreen extends StatelessWidget {
                 children: [
                   HourlyForcastItem(
                     icon: Icons.water_drop,
-                    temperature: '300',
+                    temperature: '300k',
+                    time: '13:00',
+                  ),
+                  HourlyForcastItem(
+                    icon: Icons.sunny,
+                    temperature: '275K',
+                    time: '15:00',
+                  ),
+                  HourlyForcastItem(
+                    icon: Icons.water_drop,
+                    temperature: '300K',
                     time: '13:00',
                   ),
                   HourlyForcastItem(
                     icon: Icons.water_drop,
-                    temperature: '300',
+                    temperature: '300K',
                     time: '13:00',
                   ),
                   HourlyForcastItem(
                     icon: Icons.water_drop,
-                    temperature: '300',
-                    time: '13:00',
-                  ),
-                  HourlyForcastItem(
-                    icon: Icons.water_drop,
-                    temperature: '300',
-                    time: '13:00',
-                  ),
-                  HourlyForcastItem(
-                    icon: Icons.water_drop,
-                    temperature: '300',
+                    temperature: '300K',
                     time: '13:00',
                   ),
                 ],

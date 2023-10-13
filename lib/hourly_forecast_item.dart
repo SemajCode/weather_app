@@ -19,30 +19,30 @@ class HourlyForcastItem extends StatelessWidget {
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         elevation: 6,
-        child: const Padding(
-          padding: EdgeInsets.all(8.0),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
               Text(
-                '03:00',
-                style: TextStyle(
+                time,
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Icon(
-                Icons.cloud,
+                icon,
                 size: 32,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Text(
-                '302.12',
-                style: TextStyle(fontSize: 12),
+                temperature,
+                style: const TextStyle(fontSize: 12),
               )
             ],
           ),
