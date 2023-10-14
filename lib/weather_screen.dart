@@ -26,7 +26,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
         throw 'An unexpected error occured';
       }
       return data;
-      // data['list'][0]['main']['temp'];
     } catch (e) {
       throw e.toString();
     }
@@ -67,6 +66,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
           final data = snapshot.data!;
 
+          final currentWeatherData = data['list'][0];
+
+          final currentTemp = currentWeatherData['main']['temp'];
+          final currentSky = currentWeatherData['weather'][0]['main'];
+
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -86,30 +90,32 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           sigmaX: 10,
                           sigmaY: 10,
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(16.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
                           child: Column(
                             children: [
                               Text(
-                                '200 K',
-                                style: TextStyle(
+                                '$currentTemp K',
+                                style: const TextStyle(
                                   fontSize: 32,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 16,
                               ),
                               Icon(
-                                Icons.cloud,
+                                currentSky == 'Clouds' || currentSky == 'Rain'
+                                    ? Icons.cloud
+                                    : Icons.sunny,
                                 size: 64,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 16,
                               ),
                               Text(
-                                'Rain',
-                                style: TextStyle(fontSize: 20),
+                                currentSky,
+                                style: const TextStyle(fontSize: 20),
                               ),
                             ],
                           ),
