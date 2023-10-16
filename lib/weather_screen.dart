@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/additional_info_item.dart';
@@ -17,6 +19,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
       const String uri =
           'https://api.openweathermap.org/data/2.5/forecast?q=Nigeria&APPID=$openWeatherAPIKey';
       final res = await http.get(Uri.parse(uri));
+      final data = jsonDecode(res);
     } catch (e) {}
 
     return Future(() => null);
