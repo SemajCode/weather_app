@@ -14,12 +14,15 @@ class WeatherScreen extends StatefulWidget {
 }
 
 class _WeatherScreenState extends State<WeatherScreen> {
-  Future getWeatherData() async {
+  Future<Map<String, dynamic>> getWeatherData() async {
     try {
       const String uri =
           'https://api.openweathermap.org/data/2.5/forecast?q=Nigeria&APPID=$openWeatherAPIKey';
       final res = await http.get(Uri.parse(uri));
-      final data = jsonDecode(res);
+      final Map<String, dynamic> data = jsonDecode(res.body);
+      if (data['cod'] != '200') {
+        throw 'An unexpected error occured';
+      }
     } catch (e) {}
 
     return Future(() => null);
