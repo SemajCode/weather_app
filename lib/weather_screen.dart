@@ -134,7 +134,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
                 //weather forecast cards
                 const Text(
-                  'Weather Forecast',
+                  'Hourly Forecast',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -145,35 +145,16 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   height: 10,
                 ),
 
-                const SingleChildScrollView(
+                SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      HourlyForcastItem(
-                        icon: Icons.water_drop,
-                        temperature: '300k',
-                        time: '13:00',
-                      ),
-                      HourlyForcastItem(
-                        icon: Icons.sunny,
-                        temperature: '275K',
-                        time: '15:00',
-                      ),
-                      HourlyForcastItem(
-                        icon: Icons.water_drop,
-                        temperature: '300K',
-                        time: '13:00',
-                      ),
-                      HourlyForcastItem(
-                        icon: Icons.water_drop,
-                        temperature: '300K',
-                        time: '13:00',
-                      ),
-                      HourlyForcastItem(
-                        icon: Icons.water_drop,
-                        temperature: '300K',
-                        time: '13:00',
-                      ),
+                      for (int i = 1; i < 5; i++)
+                        HourlyForcastItem(
+                          icon: Icons.water_drop,
+                          temperature: data['list'][i],
+                          time: '13:00',
+                        ),
                     ],
                   ),
                 ),
