@@ -149,11 +149,17 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      for (int i = 1; i < 5; i++)
+                      for (int i = 1; i <= 5; i++)
                         HourlyForcastItem(
-                          icon: Icons.water_drop,
-                          temperature: data['list'][i],
-                          time: '13:00',
+                          icon: data['list'][i]['weather'][0]['main'] ==
+                                      "Clouds" ||
+                                  data['list'][i]['weather'][0]['main'] ==
+                                      "Rain"
+                              ? Icons.cloud
+                              : Icons.sunny,
+                          temperature:
+                              data['list'][i]['main']['temp'].toString(),
+                          time: data['list'][i]['dt'].toString(),
                         ),
                     ],
                   ),
