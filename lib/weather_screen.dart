@@ -16,6 +16,8 @@ class WeatherScreen extends StatefulWidget {
 }
 
 class _WeatherScreenState extends State<WeatherScreen> {
+  late Future<Map<String, dynamic>> weather;
+
   Future<Map<String, dynamic>> getCurrentWeather() async {
     try {
       String cityName = 'Nigeria';
@@ -33,6 +35,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    weather = getCurrentWeather();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +53,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                setState(() {
+                  weather = getCurrentWeather();
+                });
+              },
               child: const Icon(
                 Icons.refresh,
               ),
@@ -54,7 +66,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
         ],
       ),
       body: FutureBuilder(
-        future: getCurrentWeather(),
+        future: weather,
         builder: (BuildContext context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator.adaptive());
@@ -166,26 +178,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     },
                   ),
                 ),
-
-                // SingleChildScrollView(
-                //   scrollDirection: Axis.horizontal,
-                //   child: Row(
-                //     children: [
-                //       for (int i = 1; i <= 5; i++)
-                //         HourlyForcastItem(
-                //           icon: data['list'][i]['weather'][0]['main'] ==
-                //                       "Clouds" ||
-                //                   data['list'][i]['weather'][0]['main'] ==
-                //                       "Rain"
-                //               ? Icons.cloud
-                //               : Icons.sunny,
-                //           temperature:
-                //               data['list'][i]['main']['temp'].toString(),
-                //           time: data['list'][i]['dt'].toString(),
-                //         ),
-                //     ],
-                //   ),
-                // ),
 
                 const SizedBox(
                   height: 20,
