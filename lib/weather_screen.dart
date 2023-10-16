@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:weather_app/additional_info_item.dart';
+import 'package:weather_app/hourly_forecast_item.dart';
+import 'package:weather_app/secrets.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
@@ -8,6 +12,16 @@ class WeatherScreen extends StatefulWidget {
 }
 
 class _WeatherScreenState extends State<WeatherScreen> {
+  Future getWeatherData() async {
+    try {
+      const String uri =
+          'https://api.openweathermap.org/data/2.5/forecast?q=Nigeria&APPID=$openWeatherAPIKey';
+      final res = await http.get(Uri.parse(uri));
+    } catch (e) {}
+
+    return Future(() => null);
+  }
+
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
@@ -91,64 +105,21 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        children: [
-                          Icon(
-                            Icons.cloud,
-                            size: 38,
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            '15 m/s',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            'Wind',
-                          ),
-                        ],
+                      AdditionalInfoItem(
+                        icon: Icons.cloud,
+                        value: '23 m/s',
+                        text: 'text',
                       ),
-                      Column(
-                        children: [
-                          Icon(
-                            Icons.cloud,
-                            size: 38,
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            '15 m/s',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            'Wind',
-                          )
-                        ],
+                      AdditionalInfoItem(
+                        icon: Icons.cloud,
+                        value: '23 m/s',
+                        text: 'text',
                       ),
-                      Column(
-                        children: [
-                          Icon(
-                            Icons.cloud,
-                            size: 38,
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            '15 m/s',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            'Wind',
-                          ),
-                        ],
-                      ),
+                      AdditionalInfoItem(
+                        icon: Icons.cloud,
+                        value: '23 m/s',
+                        text: 'text',
+                      )
                     ],
                   ),
                 ),
@@ -166,78 +137,21 @@ class _WeatherScreenState extends State<WeatherScreen> {
               SizedBox(height: 8),
               Row(
                 children: [
-                  SizedBox(
-                    width: 100,
-                    child: Card(
-                      elevation: 4,
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Text('9 AM'),
-                            SizedBox(height: 8),
-                            Icon(Icons.cloud),
-                            SizedBox(height: 8),
-                            Text(
-                              '16°',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  HourlyForecastItem(
+                    time: '9 AM',
+                    temp: "16°",
+                    icon: Icons.cloud,
                   ),
-                  SizedBox(
-                    width: 100,
-                    child: Card(
-                      elevation: 4,
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Text('9 AM'),
-                            SizedBox(height: 8),
-                            Icon(Icons.cloud),
-                            SizedBox(height: 8),
-                            Text(
-                              '16°',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  HourlyForecastItem(
+                    time: '9 AM',
+                    temp: "16°",
+                    icon: Icons.cloud,
                   ),
-                  SizedBox(
-                    width: 100,
-                    child: Card(
-                      elevation: 4,
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Text('9 AM'),
-                            SizedBox(height: 8),
-                            Icon(Icons.cloud),
-                            SizedBox(height: 8),
-                            Text(
-                              '16°',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
+                  HourlyForecastItem(
+                    time: '9 AM',
+                    temp: "16°",
+                    icon: Icons.cloud,
+                  ),
                 ],
               )
             ],
