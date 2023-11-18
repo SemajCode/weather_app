@@ -14,6 +14,32 @@ class AdditionalInfoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+    if (size.width > 1080) {
+      return Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              size: 108,
+            ),
+            const SizedBox(height: 22),
+            Text(
+              value,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 44,
+              ),
+            ),
+            const SizedBox(height: 22),
+            Text(
+              text,
+            ),
+          ],
+        ),
+      );
+    }
     return Column(
       children: [
         Icon(

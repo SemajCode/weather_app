@@ -124,66 +124,134 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   const SizedBox(height: 24),
 
                   //Main Weather information
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '$currentTemp °C',
-                            style: const TextStyle(
-                              fontSize: 72,
-                              fontWeight: FontWeight.bold,
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      if (constraints.maxWidth > 1080) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '$currentTemp °C',
+                                  style: const TextStyle(
+                                    fontSize: 150,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  currentSky,
+                                  style: const TextStyle(
+                                    fontSize: 54,
+                                  ),
+                                ),
+                                Icon(
+                                  currentWeatherIcon,
+                                  size: 128,
+                                ),
+                              ],
                             ),
-                          ),
-                          Text(
-                            currentSky,
-                            style: const TextStyle(
-                              fontSize: 24,
+                            Card(
+                              elevation: 4,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 24, horizontal: 16),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    AdditionalInfoItem(
+                                      icon: Icons.air,
+                                      value: '$currentSpeed m/s',
+                                      text: 'Wind',
+                                    ),
+                                    AdditionalInfoItem(
+                                      icon: Icons.invert_colors,
+                                      value: '$humidity%',
+                                      text: 'Humidity',
+                                    ),
+                                    AdditionalInfoItem(
+                                      icon: Icons.trending_up,
+                                      value: pressure,
+                                      text: 'Pressure',
+                                    )
+                                  ],
+                                ),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Icon(
-                        currentWeatherIcon,
-                        size: 98,
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 30),
+                            //////////
+                          ],
+                        );
+                      } else {
+                        return Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '$currentTemp °C',
+                                      style: const TextStyle(
+                                        fontSize: 72,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      currentSky,
+                                      style: const TextStyle(
+                                        fontSize: 24,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Icon(
+                                  currentWeatherIcon,
+                                  size: 98,
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 30),
 
-                  //Additional Weather information
-                  Card(
-                    elevation: 4,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 24, horizontal: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          AdditionalInfoItem(
-                            icon: Icons.air,
-                            value: '$currentSpeed m/s',
-                            text: 'Wind',
-                          ),
-                          AdditionalInfoItem(
-                            icon: Icons.invert_colors,
-                            value: '$humidity%',
-                            text: 'Humidity',
-                          ),
-                          AdditionalInfoItem(
-                            icon: Icons.trending_up,
-                            value: pressure,
-                            text: 'Pressure',
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
+                            //Additional Weather information
+                            Card(
+                              elevation: 4,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 24, horizontal: 16),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    AdditionalInfoItem(
+                                      icon: Icons.air,
+                                      value: '$currentSpeed m/s',
+                                      text: 'Wind',
+                                    ),
+                                    AdditionalInfoItem(
+                                      icon: Icons.invert_colors,
+                                      value: '$humidity%',
+                                      text: 'Humidity',
+                                    ),
+                                    AdditionalInfoItem(
+                                      icon: Icons.trending_up,
+                                      value: pressure,
+                                      text: 'Pressure',
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 24),
 
-                  // buttom hourly forecast
+                            // buttom hourly forecast
+                          ],
+                        );
+                      }
+                    },
+                  ),
                   const Text(
                     'Today',
                     style: TextStyle(
@@ -223,16 +291,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         );
                       },
                     ),
-                  )
-                  // Row(
-                  //   children: [
-                  // HourlyForecastItem(
-                  //   time: '9 AM',
-                  //   temp: "16°",
-                  //   icon: Icons.cloud,
-                  // ),
-                  //   ],
-                  // ),
+                  ),
                 ],
               );
             },
